@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-form',
@@ -8,7 +9,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 })
 export class ClientFormComponent {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   clientForm = new FormGroup({
     accountNumber: new FormControl(),
@@ -51,5 +52,10 @@ export class ClientFormComponent {
     return
   }
 
+  onCancel() {
+    this.clientForm.reset();
+    this.fContacts.clear();
+    this.router.navigate(['/']);
+  }
 }
  
