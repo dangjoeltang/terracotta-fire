@@ -1,3 +1,13 @@
-<p>client works!</p>
-
-{{ data }}
+<div class="client-container">
+  <h4>Clients</h4>
+  <app-client-table [clients]="clients"></app-client-table>
+  <div class="action-buttons">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="createNewClient()"
+    >
+      Add Client
+    </button>
+  </div>
+</div>

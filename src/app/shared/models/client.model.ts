@@ -6,11 +6,12 @@ export interface Client {
   businessType: string;
   accountType: string;
   companySize: string;
+  discount: string;
+  paymentTerms: string;
+  taxResaleNumber: string;
 
   streetAddress: StreetAddress;
 
-  paymentTerms: string;
-  taxResaleNumber: string;
   contacts: Contact[];
 }
 
@@ -22,7 +23,7 @@ export interface StreetAddress {
 }
 
 export interface Contact {
-  mainContact: boolean;
+  name: string;
   phone: string;
   email: string;
   fax: string;

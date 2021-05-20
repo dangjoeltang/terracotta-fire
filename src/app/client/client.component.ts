@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { ClientService } from '../core/services/client/client.service';
+import { Client } from '../shared/models/client.model';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  private itemDoc: AngularFirestoreDocument;
-  item: Observable<any>;
-  data: any;
+  clients: Client[];
+  constructor(private clientService: ClientService, private router: Router) { }
 
-  constructor(afs: AngularFirestore) {
-    this.itemDoc = afs.doc('clients/klfU8VpAvW25IJD0vUng');
-    this.item = this.itemDoc.valueChanges()
-  }
-
-  ngOnInit(): void {
-    this.item.subscribe(res => {
-      console.log(res)
-      this.data = res;
+  ngOnInit() {
+    this.clientService.clients$.subscribe((clientList: Client[]) => {
+      this.clients = clientList;
     })
+    this.retrieveClients();
   }
 
+  retrieveClients() {
+    this.clientService.getClients();
+  }
+
+  createNewClient() {
+    console.log('create client triggered!');
+    this.router.navigate(['/new']);
+  }
 }

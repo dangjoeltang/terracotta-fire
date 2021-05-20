@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "resolveJsonModule": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -12,13 +13,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+    "enableI18nLegacyMessageIdFormat": false
   }
 }

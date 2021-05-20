@@ -1,22 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientComponent } from './client.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CdkTableModule } from '@angular/cdk/table';
+
+import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
+import { ClientTableComponent } from './client-table/client-table.component';
+import { ClientFormComponent } from './client-form/client-form.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    ClientComponent
+    ClientComponent,
+    ClientTableComponent,
+    ClientFormComponent,
+    ClientDetailsComponent
   ],
   imports: [
+    AngularFirestoreModule,
+    CdkTableModule,
     CommonModule,
     ClientRoutingModule,
-    AngularFirestoreModule
+    SharedModule
   ],
   exports: [
     ClientComponent
-  ]
+  ],
+  providers: []
 })
 export class ClientModule { }

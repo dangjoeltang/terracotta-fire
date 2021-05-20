@@ -1,0 +1,18 @@
+<div class="client-table">
+  <div class="list-group">
+    <div *ngFor="let client of clients">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h3 class="mb-1">{{ client.name }}</h3>
+          <small>{{ client.state }}</small>
+        </div>
+        <div>
+          <small>tel: {{ client.phone }}</small>
+        </div>
+        <div>
+          <small>email: {{ client.email }}</small>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

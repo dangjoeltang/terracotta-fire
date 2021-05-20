@@ -1,21 +1,37 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Client } from 'src/app/shared/models/client.model';
+import mockData from 'src/assets/mock-clients.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
-  private clientsCollection: AngularFirestoreCollection<Client>;
-  clients: Observable<Client[]>;
+  clientMock: any[] = mockData;
 
-  constructor(private afs: AngularFirestore) {
-    this.clientsCollection = afs.collection<Client>('clients');
+  private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients');
 
-    this.clients = this.clientsCollection.valueChanges();
+  private clients = new BehaviorSubject(null);
+  public clients$ = this.clients.asObservable();
+
+  constructor(private afs: AngularFirestore) { }
+
+  getClients() {
+    this.clientsCollection.valueChanges().subscribe(
+      (data: Client[]) => this.clients.next(data)
+    )
+  }
+
+  pushMockData() {
+    // console.log(this.clientMock)
+    // for (let client of this.clientMock) {
+    //   // this.clientsCollection.add(client);
+    //   // console.log(client);
+    // }
   }
 }
