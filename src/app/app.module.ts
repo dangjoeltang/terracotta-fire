@@ -7,6 +7,7 @@ import { ClientModule } from './client/client.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -18,7 +19,6 @@ import { NavigationModule } from './navigation/navigation.module';
     BrowserAnimationsModule,
     BrowserModule,
     CoreModule,
-    ClientModule,
     NavigationModule,
     SharedModule,
   ],

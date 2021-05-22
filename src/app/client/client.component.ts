@@ -24,6 +24,6 @@ export class ClientComponent implements OnInit {
 
   createNewClient() {
     console.log('create client triggered!');
-    this.router.navigate(['/new']);
+    this.router.navigate(['clients/new']);
   }
 }
