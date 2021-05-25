@@ -9,6 +9,7 @@ import { ClientTableComponent } from './client-table/client-table.component';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatTableModule } from '@angular/material/table';
 
 
 

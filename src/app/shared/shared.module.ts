@@ -9,6 +9,10 @@ import { MenuLinksComponent } from './components/side-menu/menu-links/menu-links
 import { MenuDropdownComponent } from './components/side-menu/menu-dropdown/menu-dropdown.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -21,16 +25,24 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    MatPaginatorModule,
+    MatTableModule,
     ReactiveFormsModule,
     RouterModule
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    MatPaginatorModule,
+    MatTableModule,
     MenuDropdownComponent,
     MenuLinksComponent,
     ReactiveFormsModule,

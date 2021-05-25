@@ -4,4 +4,26 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .header {
+    display: flex;
+    align-items: baseline;
+    // justify-content: space-between;
+  }
+
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+
+    .table {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 16px;
+    }
+
+    .details {
+      flex: 1;
+    }
+  }
 }
