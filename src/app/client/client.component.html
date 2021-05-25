@@ -10,8 +10,14 @@
     </button>
   </div> -->
   <div class="dashboard">
-    <app-client-table class="table"></app-client-table>
-    <app-client-details class="details"></app-client-details>
+    <app-client-table
+      class="table"
+      (clientSelected)="clientSelected($event)"
+    ></app-client-table>
+    <app-client-details
+      class="details"
+      [client]="clientOI"
+    ></app-client-details>
   </div>
 </div>
 

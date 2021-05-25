@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
+  AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -16,14 +17,25 @@ export class ClientService {
 
   private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients');
 
-  private clients = new BehaviorSubject(null);
-  public clients$ = this.clients.asObservable();
+  private clientsList = new BehaviorSubject(null);
+  public clientsList$ = this.clientsList.asObservable();
+
+  private client = new BehaviorSubject(null);
+  public client$ = this.client.asObservable();
 
   constructor(private afs: AngularFirestore) { }
 
   getClients() {
-    this.clientsCollection.valueChanges().subscribe(
-      (data: Client[]) => this.clients.next(data)
+    this.clientsCollection.valueChanges({ idField: 'clientId' }).subscribe(
+      (data) => this.clientsList.next(data)
+    )
+  }
+
+  getClient(clientId: string) {
+    const clientDoc: AngularFirestoreDocument<Client> = this.afs.doc<Client>(`clients/${clientId}`);
+    // this.client.next(clientDoc.valueChanges());
+    clientDoc.valueChanges().subscribe(
+      data => this.client.next(data)
     )
   }
 

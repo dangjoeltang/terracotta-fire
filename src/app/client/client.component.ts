@@ -9,10 +9,12 @@ import { Client } from '../shared/models/client.model';
 })
 export class ClientComponent implements OnInit {
   clients: Client[];
+  clientOI: Client;
+
   constructor(private clientService: ClientService, private router: Router) { }
 
   ngOnInit() {
-    this.clientService.clients$.subscribe((clientList: Client[]) => {
+    this.clientService.clientsList$.subscribe((clientList: Client[]) => {
       this.clients = clientList;
     })
     this.retrieveClients();
@@ -25,5 +27,9 @@ export class ClientComponent implements OnInit {
   createNewClient() {
     console.log('create client triggered!');
     this.router.navigate(['clients/new']);
+  }
+
+  clientSelected(client: Client) {
+    this.clientOI = client;
   }
 }

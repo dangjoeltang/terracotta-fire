@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { Client } from 'src/app/shared/models/client.model';
   styleUrls: ['./client-table.component.scss']
 })
 export class ClientTableComponent implements OnInit {
+  @Output() clientSelected: EventEmitter<Client> = new EventEmitter();
   dataSource;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -21,10 +22,13 @@ export class ClientTableComponent implements OnInit {
   constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
-    this.clientService.clients$.subscribe((clientList: Client[]) => {
+    this.clientService.clientsList$.subscribe((clientList: Client[]) => {
       this.dataSource = new MatTableDataSource(clientList);
       this.dataSource.paginator = this.paginator;
     })
+    // this.clientService.client$.subscribe((res) => {
+    //   console.log(res);
+    // })
   }
 
   applyFilter(event: Event) {
@@ -34,5 +38,9 @@ export class ClientTableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  selectClient(client: Client): void {
+    this.clientSelected.emit(client)
   }
 }

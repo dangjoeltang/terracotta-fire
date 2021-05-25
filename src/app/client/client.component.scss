@@ -12,18 +12,10 @@
   }
 
   .dashboard {
-    display: flex;
-    flex-direction: column;
-
     .table {
-      flex: 1;
-      min-height: 0;
-      overflow: auto;
-      padding: 16px;
     }
 
     .details {
-      flex: 1;
     }
   }
 }
