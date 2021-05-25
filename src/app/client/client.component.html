@@ -1,32 +1,22 @@
 <div class="client-container">
-  <!-- <div class="header">
-    <span>Clients</span>
-    <button
-      type="button"
-      class="btn btn-success btn-sm"
-      (click)="createNewClient()"
-    >
-      Add Client
-    </button>
-  </div> -->
   <div class="dashboard">
     <app-client-table
       class="table"
       (clientSelected)="clientSelected($event)"
-    ></app-client-table>
+    >
+    </app-client-table>
+    <button
+      class="extended-fab-button fab-add-new-client"
+      mat-fab
+      color="primary"
+      (click)="createNewClient()"
+    >
+      <mat-icon>add</mat-icon>
+      <span class="extended-fab-button__text">Add Client</span>
+    </button>
     <app-client-details
       class="details"
       [client]="clientOI"
     ></app-client-details>
   </div>
 </div>
-
-<!-- <div class="action-buttons">
-  <button
-    type="button"
-    class="btn btn-success"
-    (click)="createNewClient()"
-  >
-    Add Client
-  </button>
-</div> -->

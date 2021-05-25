@@ -1,10 +1,12 @@
 export const NavLinks = [
   {
-    displayText: "Home",
+    displayText: "Dashboard",
     routerLink: "home",
+    icon: "home"
   },
   {
     displayText: "Clients",
     routerLink: "clients",
+    icon: "group"
   },
 ]

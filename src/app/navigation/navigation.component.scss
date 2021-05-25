@@ -1,3 +1,6 @@
+@import '../../variables.scss';
+@import '../../styles.scss';
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -6,24 +9,88 @@
   bottom: 0;
   left: 0;
   right: 0;
-}
 
-.is-mobile .toolbar {
-  position: fixed;
-  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-  z-index: 2;
-}
+  .is-mobile .toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
 
-h1.app-name {
-  margin-left: 8px;
-}
+  .toolbar {
+    display: flex;
+    padding: 0;
 
-.sidenav-container {
-  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+    .brand {
+      width: $sidenav-width;
+      padding: 0 16px;
+      box-sizing: border-box;
+      display: flex;
+
+      .brand-logo {
+        background-image: url('/assets/kanova_favicon.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        flex: 0 1 30px;
+      }
+
+      .app-name {
+        flex: 1 1 auto;
+        font-size: 1.8rem;
+      }
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .menu-button {
+    }
+  }
+
+  h1.app-name {
+    margin-left: 8px;
+  }
+
+  .sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-  flex: 1;
-}
+    flex: 1;
 
-mat-sidenav-content {
-  padding: 24px;
+    mat-sidenav {
+      width: $sidenav-width;
+
+      @media (max-width: 599px) {
+        width: $sidenav-width--mobile;
+      }
+
+      mat-nav-list {
+        .nav-item-container {
+          width: 100%;
+          display: flex;
+
+          .nav-items {
+            mat-icon {
+              // font-size: 24px;
+              flex: 0 1;
+            }
+
+            .nav-text {
+              font-size: 16px;
+              font-weight: 500;
+              margin-left: 16px;
+              flex: 1 1 auto;
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  mat-sidenav-content {
+    padding: 24px;
+    @media (max-width: 599px) {
+      padding: 24px 0;
+    }
+  }
 }

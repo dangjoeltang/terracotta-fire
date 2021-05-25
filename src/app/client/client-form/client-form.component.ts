@@ -55,7 +55,7 @@ export class ClientFormComponent {
   onCancel() {
     this.clientForm.reset();
     this.fContacts.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/clients']);
   }
 }
  

@@ -1,3 +1,17 @@
-<div class="client-details-container mat-elevation-z8">
-  {{ client | json }}
+<div class="client-details-container">
+  <!-- {{ client | json }} -->
+  <ul class="list-group" *ngIf="client">
+    <li class="list-group-item">Client Name: {{ client.name }}</li>
+    <li class="list-group-item">ID: {{ client.clientId }}</li>
+    <li class="list-group-item">Email: {{ client.email }}</li>
+    <li class="list-group-item">Phone: {{ client.phone }}</li>
+    <li class="list-group-item">Fax: {{ client.fax }}</li>
+    <li class="list-group-item">Address: {{ client.address }}</li>
+    <li class="list-group-item">City: {{ client.city }}</li>
+    <li class="list-group-item">State: {{ client.state }}</li>
+    <li class="list-group-item">Zipcode: {{ client.zipcode }}</li>
+    <li class="list-group-item">
+      Discount: {{ client.discount ? client.discount : 'none' }}
+    </li>
+  </ul>
 </div>

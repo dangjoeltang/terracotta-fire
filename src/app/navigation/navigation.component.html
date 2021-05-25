@@ -1,7 +1,19 @@
 <div class="main-container">
   <mat-toolbar color="primary" class="toolbar">
-    <h1 class="app-name">Responsive App</h1>
-    <button (click)="sideNav.toggle()">Menu</button>
+    <span class="brand">
+      <div class="brand-logo"></div>
+      <h1 class="app-name">Kanova</h1>
+    </span>
+    <span class="spacer"></span>
+    <button
+      class="menu-button"
+      mat-icon-button
+      (click)="sideNav.toggle()"
+      [style.visibility]="mobileQuery.matches ? 'visible' : 'hidden'"
+    >
+      <mat-icon>menu</mat-icon>
+      <!-- Menu -->
+    </button>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
@@ -13,10 +25,17 @@
       [position]="mobileQuery.matches ? 'end' : 'start'"
     >
       <mat-nav-list>
-        <div *ngFor="let nav of navLinks">
-          <a mat-list-item [routerLink]="nav.routerLink">{{
-            nav.displayText
-          }}</a>
+        <div *ngFor="let nav of navLinks" class="nav-item-container">
+          <a
+            mat-list-item
+            [routerLink]="nav.routerLink"
+            class="nav-items"
+          >
+            <mat-icon color="primary">{{ nav.icon }}</mat-icon>
+            <span class="nav-text">
+              {{ nav.displayText }}
+            </span>
+          </a>
         </div>
       </mat-nav-list>
     </mat-sidenav>

@@ -18,6 +18,7 @@ export class ClientTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['name', 'email', 'state'];
+  displayedColumnsMobile: string[] = ['name', 'email', 'state'];
 
   constructor(private clientService: ClientService) { }
 
