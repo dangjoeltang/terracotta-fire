@@ -1,41 +1,32 @@
-
-// export interface Client {
-//   accountNumber: string;
-//   name: string;
-
-//   businessType: string;
-//   accountType: string;
-//   companySize: string;
-//   discount: string;
-//   paymentTerms: string;
-//   taxResaleNumber: string;
-
-//   streetAddress: StreetAddress;
-
-//   contacts: Contact[];
-// }
-
 export interface Client {
-  name: string;
   clientId: string;
-  email: string;
-  phone: string;
-  fax: string;
-  address: string;
-  city: string;
-  state: string;
-  zipcode: string;
-}
-export interface StreetAddress {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
-export interface Contact {
+  groupId: number|string;
+  accountId: number|string;
+  number: string;
   name: string;
+  clientType: number|string;
+  discount: string;
+  state: string;
+  city: string;
+  address: string;
+  postcode: string;
+
+  mainContact: string;
   phone: string;
-  email: string;
-  fax: string;
+  paymentTerms: string;
+  size: number|string;
+  attachment: string;
+  description: string;
+  registerTaxCode: string;
+
+  createBy: string;
+  modifyBy: string;
+
+  businessType: string;
+  accountType: number|string;
+  purchaseContact: string;
+  billingContact: string;
+
+  createDate: Date;
+  modifyDate: Date;
 }

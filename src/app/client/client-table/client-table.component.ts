@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { ClientService } from 'src/app/core/services/client/client.service';
 import { Client } from 'src/app/shared/models/client.model';
@@ -11,25 +10,26 @@ import { Client } from 'src/app/shared/models/client.model';
   templateUrl: './client-table.component.html',
   styleUrls: ['./client-table.component.scss']
 })
-export class ClientTableComponent implements OnInit {
+export class ClientTableComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() clientList: Client[];
   @Output() clientSelected: EventEmitter<Client> = new EventEmitter();
-  dataSource;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  dataSource: MatTableDataSource<Client>
   displayedColumns: string[] = ['name', 'email', 'state'];
   displayedColumnsMobile: string[] = ['name', 'email', 'state'];
+  
+  private unsubscribe$: Subject<void>;
 
   constructor(private clientService: ClientService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dataSource = new MatTableDataSource<Client>(this.clientList);
+    this.dataSource.paginator = this.paginator;
+  }
+
   ngOnInit(): void {
-    this.clientService.clientsList$.subscribe((clientList: Client[]) => {
-      this.dataSource = new MatTableDataSource(clientList);
-      this.dataSource.paginator = this.paginator;
-    })
-    // this.clientService.client$.subscribe((res) => {
-    //   console.log(res);
-    // })
+    
   }
 
   applyFilter(event: Event) {
@@ -43,5 +43,11 @@ export class ClientTableComponent implements OnInit {
 
   selectClient(client: Client): void {
     this.clientSelected.emit(client)
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubscribe$) {
+      this.unsubscribe$.next();
+    }
   }
 }

@@ -14,7 +14,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
   declarations: [
@@ -25,26 +29,36 @@ import { MatButtonModule } from '@angular/material/button';
     MenuDropdownComponent
   ],
   imports: [
+    CdkStepperModule,
     CommonModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatStepperModule,
     MatTableModule,
     ReactiveFormsModule,
     RouterModule
   ],
   exports: [
+    CdkStepperModule,
     FooterComponent,
     HeaderComponent,
     MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatStepperModule,
     MatTableModule,
     MenuDropdownComponent,
     MenuLinksComponent,

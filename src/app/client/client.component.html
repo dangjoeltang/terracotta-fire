@@ -1,22 +1,24 @@
 <div class="client-container">
-  <div class="dashboard">
-    <app-client-table
-      class="table"
-      (clientSelected)="clientSelected($event)"
-    >
-    </app-client-table>
-    <button
-      class="extended-fab-button fab-add-new-client"
-      mat-fab
-      color="primary"
-      (click)="createNewClient()"
-    >
-      <mat-icon>add</mat-icon>
-      <span class="extended-fab-button__text">Add Client</span>
-    </button>
-    <app-client-details
-      class="details"
-      [client]="clientOI"
-    ></app-client-details>
+  <!-- <div class="dashboard">
   </div>
+  <button (click)="refresh()">refresh</button> -->
+  <app-client-table
+    class="table"
+    (clientSelected)="clientSelected($event)"
+    [clientList]="clients"
+  >
+  </app-client-table>
+  <button
+    class="extended-fab-button fab-add-new-client"
+    mat-fab
+    color="primary"
+    (click)="openCreateClientDialog()"
+  >
+    <mat-icon>add</mat-icon>
+    <span class="extended-fab-button__text">Add Client</span>
+  </button>
+  <app-client-details
+    class="details"
+    [client]="client"
+  ></app-client-details>
 </div>

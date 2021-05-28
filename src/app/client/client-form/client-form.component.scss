@@ -1,12 +1,13 @@
-.client-for-container {
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-
-    &__title {
-    }
+.client-form-container {
+  @media (max-width: 599px) {
+    width: 100%;
   }
 
-  .contact-card {
+  .header {
+    display: flex;
+
+    .spacer {
+      flex: 1 1 auto;
+    }
   }
 }

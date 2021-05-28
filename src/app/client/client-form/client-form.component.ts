@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
+import { ClientService } from 'src/app/core/services/client/client.service';
 
 @Component({
   selector: 'app-client-form',
@@ -9,53 +10,45 @@ import { Router } from '@angular/router';
 })
 export class ClientFormComponent {
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
-
-  clientForm = new FormGroup({
-    accountNumber: new FormControl(),
-    clientName: new FormControl(),
-    businessType: new FormControl(),
-    accountType: new FormControl(),
-    companySize: new FormControl(),
-    discount: new FormControl(),
-    paymentTerms: new FormControl(),
-    taxResaleNumber: new FormControl(),
-
-    streetAddress: new FormGroup({
-      street: new FormControl(),
-      city: new FormControl(),
-      state: new FormControl(),
-      zip: new FormControl()
-    }),
-
-    contacts: new FormArray([]),
-  })
-
   get f() { return this.clientForm.controls; }
   get fContacts() { return this.f.contacts as FormArray; }
 
-  contactForm = new FormGroup({
+  constructor(private clientsService: ClientService, private formBuilder: FormBuilder, private router: Router) { }
 
+  clientForm = this.formBuilder.group({
+    accountNumber: [null],
+    clientName: ['', Validators.required],
+    businessType: [''],
+    accountType: [''],
+    discount: [0, Validators.compose([Validators.min(0), Validators.max(100)])],
+    paymentTerms: [''],
+    taxResaleNumber: [''],
+    // accountNumber: new FormControl(),
+    // clientName: new FormControl(),
+    // businessType: new FormControl(),
+    // accountType: new FormControl(),
+    // discount: new FormControl(),
+    // paymentTerms: new FormControl(),
+    // taxResaleNumber: new FormControl(),
   })
 
-  addContact() {
-    this.fContacts.push(this.formBuilder.group({
-      name: [''],
-      phone: [''],
-      email: [''],
-      fax: ['']
-    }))
-  }
 
   onSubmit() {
-    console.log(this.clientForm.value)
-    return
+    console.log(this.clientForm.value);
+    if (this.clientForm.valid) {
+      this.clientsService.createClient(this.clientForm.value);
+    } else {
+      console.log('Form not valid, please check again.');
+    }
   }
 
   onCancel() {
-    this.clientForm.reset();
     this.fContacts.clear();
     this.router.navigate(['/clients']);
+  }
+
+  logProgress() {
+    console.log()
   }
 }
  

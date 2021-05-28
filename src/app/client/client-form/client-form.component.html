@@ -1,210 +1,144 @@
 <div class="client-form-container">
-  <h3>Add new client</h3>
-  <form
-    [formGroup]="clientForm"
-    (ngSubmit)="onSubmit()"
-    class="row g-3"
+  <div class="header">
+    <h2 mat-dialog-title>Add a new client</h2>
+    <span class="spacer"></span>
+    <button
+      class="dialog-close-button"
+      mat-icon-button
+      mat-dialog-close
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-vertical-stepper
+    class="client-form-stepper"
+    orientation="vertical"
+    linear
   >
-    <h2>Business Info</h2>
-    <div class="col-md-6">
-      <label for="inputName" class="form-label">Client Name*</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputName"
-        formControlName="clientName"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="inputAccNumber" class="form-label"
-        >Account Number*</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        id="inputAccNumber"
-        formControlName="accountNumber"
-      />
-    </div>
-    <div class="col-md-6 col-lg-4">
-      <label for="inputBusinessType" class="form-label"
-        >Business Type</label
-      >
-      <select
-        id="inputBusinessType"
-        class="form-select"
-        formControlName="businessType"
-      >
-        <option selected>Choose...</option>
-        <option>Lighting Showroom</option>
-        <option>Furniture & Home Decoration Store</option>
-        <option>Designer</option>
-        <option>Contractor</option>
-        <option>Other</option>
-      </select>
-    </div>
-
-    <div class="col-md-6 col-lg-4">
-      <label for="inputAccountType" class="form-label"
-        >Client Account Type</label
-      >
-      <select
-        id="inputAccountType"
-        class="form-select"
-        formControlName="accountType"
-      >
-        <option selected>Choose...</option>
-        <option>Stocking Dealer</option>
-        <option>Non-stocking Dealer</option>
-      </select>
-    </div>
-
-    <div class="col-md-6 col-lg-4">
-      <label for="inputCompanySize" class="form-label"
-        >Company Size</label
-      >
-      <select
-        id="inputCompanySize"
-        class="form-select"
-        formControlName="companySize"
-      >
-        <option selected>Choose...</option>
-        <option>Small (fewer than 100 employees)</option>
-        <option>Medium (100 to 500 employees)</option>
-        <option>Large (greater than 500 employees)</option>
-      </select>
-    </div>
-
-    <div class="col-md-6">
-      <label for="inputDiscount" class="form-label">Discount*</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputDiscount"
-        formControlName="discount"
-      />
-    </div>
-
-    <div class="col-md-6">
-      <label for="inputPaymentTerms" class="form-label"
-        >Payment Terms*</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        id="inputPaymentTerms"
-        formControlName="paymentTerms"
-      />
-    </div>
-
-    <div class="col-md-6">
-      <label for="inputTaxResaleNumber" class="form-label"
-        >Tax Resale Number*</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        id="inputTaxResaleNumber"
-        formControlName="taxResaleNumber"
-      />
-    </div>
-
-    <hr />
-    <div class="section-header">
-      <h2 class="section-header__title">Contacts</h2>
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="addContact()"
-      >
-        Add Contact
-      </button>
-    </div>
-
-    <div *ngFor="let contact of fContacts.controls; let i = index">
-      <div [formGroup]="contact" class="form-row row">
-        <div class="contact-card">
-          <div class="col-md-6">
-            <label for="inputContactName" class="form-label"
-              >Name</label
+    <mat-step [stepControl]="clientForm" [editable]="true">
+      <form [formGroup]="clientForm">
+        <ng-template matStepLabel>Basic client info</ng-template>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Client Name</mat-label>
+            <input
+              matInput
+              formControlName="clientName"
+              placeholder="Placeholder"
+              cdkFocusInitial
+              required
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="accountNumber" />
+            <mat-hint>Leave blank to auto-generate</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-select
+              formControlName="businessType"
+              placeholder="Business Type"
+              required
             >
-            <input
-              type="text"
-              class="form-control"
-              id="inputContactName"
-              formControlName="name"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputPhone" class="form-label">Phone</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputPhone"
-              formControlName="phone"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputEmail"
-              formControlName="email"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputFax" class="form-label">Fax</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputFax"
-              formControlName="fax"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer text-center">
-      <button class="btn btn-secondary mr-1" (click)="onCancel()">
-        Cancel
-      </button>
-      <button class="btn btn-primary mr-1">Submit</button>
-    </div>
-  </form>
-</div>
+              <mat-option value="lighting-showroom"
+                >Lighting Showroom</mat-option
+              >
+              <mat-option value="retail-store"
+                >Furniture & Home Decoration Store</mat-option
+              >
+              <mat-option value="designer">Designer</mat-option>
+              <mat-option value="contractor">Contractor</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-select
+              formControlName="accountType"
+              placeholder="Account Type"
+              required
+            >
+              <mat-option value="stocking"
+                >Stocking Dealer</mat-option
+              >
+              <mat-option value="non-stocking"
+                >Non-stocking Dealer</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </p>
+      </form>
 
-<!-- <div class="col-12">
-  <label for="inputAddress" class="form-label">Address</label>
-  <input
-    type="text"
-    class="form-control"
-    id="inputAddress"
-    placeholder="1234 Main St"
-    formControlName=""
-  />
+      <mat-dialog-actions align="end">
+        <button mat-button matStepperNext>Next</button>
+      </mat-dialog-actions>
+    </mat-step>
+
+    <mat-step [stepControl]="clientForm" [editable]="true">
+      <form [formGroup]="clientForm">
+        <ng-template matStepLabel>Client Payment Info</ng-template>
+
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Tax Resale Number</mat-label>
+            <input matInput formControlName="taxResaleNumber" />
+            <mat-hint>Tax ID or SSN</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Discount</mat-label>
+            <input
+              matInput
+              formControlName="discount"
+              placeholder="Enter client discount"
+            />
+            <mat-hint>Defaults to 0%</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Payment Terms</mat-label>
+            <input
+              matInput
+              formControlName="paymentTerms"
+              placeholder="Payment Terms"
+            />
+            <mat-hint>ex. Net 30</mat-hint>
+          </mat-form-field>
+        </p>
+      </form>
+      <mat-dialog-actions align="end">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </mat-dialog-actions>
+    </mat-step>
+
+    <mat-step [stepControl]="clientForm" [editable]="true">
+      <ng-template matStepLabel>Confirm</ng-template>
+
+      <div></div>
+
+      {{ clientForm.value | json }}
+
+      <mat-dialog-actions align="end">
+        <button mat-button matStepperPrevious>Back</button>
+        <button
+          mat-button
+          matStepperNext
+          color="primary"
+          (click)="onSubmit()"
+          [disabled]="!clientForm.valid"
+        >
+          Submit
+        </button>
+      </mat-dialog-actions>
+    </mat-step>
+  </mat-vertical-stepper>
 </div>
-<div class="col-12">
-  <label for="inputAddress2" class="form-label">Address 2</label>
-  <input
-    type="text"
-    class="form-control"
-    id="inputAddress2"
-    placeholder="Apartment, studio, or floor"
-  />
-</div>
-<div class="col-md-6">
-  <label for="inputCity" class="form-label">City</label>
-  <input type="text" class="form-control" id="inputCity" />
-</div>
-<div class="col-md-4">
-  <label for="inputState" class="form-label">State</label>
-  <select id="inputState" class="form-select">
-    <option selected>Choose...</option>
-    <option>...</option>
-  </select>
-</div>
-<div class="col-md-2">
-  <label for="inputZip" class="form-label">Zip</label>
-  <input type="text" class="form-control" id="inputZip" />
-</div> -->
