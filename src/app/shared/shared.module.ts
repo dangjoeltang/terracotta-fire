@@ -19,6 +19,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     CdkStepperModule,
     CommonModule,
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -50,6 +53,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     FooterComponent,
     HeaderComponent,
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
     MatFormFieldModule,
