@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-.landing-container {
+.auth-container {
   display: flex;
   min-height: 100vh;
   background-color: #d4d4d4;
@@ -13,20 +13,6 @@
       padding: 24px;
       border-radius: 4px;
       background-color: white;
-
-      .kanova-logo {
-        max-width: 300px;
-        margin-bottom: 18px;
-      }
-
-      .login-buttons {
-        display: flex;
-        justify-content: flex-end;
-
-        button {
-          margin-left: 16px;
-        }
-      }
     }
   }
 }

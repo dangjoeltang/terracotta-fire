@@ -1,7 +1,7 @@
 export interface Client {
   clientId: string;
   groupId: number|string;
-  accountId: number|string;
+  accountNumber: number|string;
   number: string;
   name: string;
   clientType: number|string;

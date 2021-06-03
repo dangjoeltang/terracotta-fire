@@ -1,0 +1,45 @@
+@import '../../../variables.scss';
+
+.register-form-container {
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+
+  max-width: 580px;
+
+  .header {
+    display: flex;
+    align-items: baseline;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+
+  .register-form-stepper {
+    .register-form {
+      mat-form-field {
+        margin-bottom: 32px;
+      }
+    }
+
+    .company-name-confirmation {
+      .name-preview {
+        background-color: $color-field-highlight;
+        font-weight: 400;
+      }
+
+      .confirmation-prompt {
+        font-size: 14px;
+
+        mat-icon {
+          // font-size: 20px;
+        }
+      }
+    }
+  }
+}

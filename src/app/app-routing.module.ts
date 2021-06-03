@@ -7,18 +7,22 @@ const routes: Routes = [
     path: '',
     component: LandingComponent
   },
-  // {
-  //   path: 'login',
-  //   loadChildren: () => import ('./auth/auth.module').then(m => m.AuthModule)
-  // },
+  {
+    path: 'auth',
+    loadChildren: () => import ('./auth/auth.module').then(m => m.AuthModule)
+  },
   // {
   //   path: 'home',
   //   loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   // },
   // {
-  //   path: 'clients',
-  //   loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+  //   path: 'manage',
+  //   loadChildren: () => import('./navigation/navigation.module').then(m => m.Navi)
   // },
+  {
+    path: 'clients',
+    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+  },
 
 ];
 

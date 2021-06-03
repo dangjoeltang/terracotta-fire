@@ -20,6 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -33,10 +35,12 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     CdkStepperModule,
     CommonModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -50,12 +54,14 @@ import { MatCardModule } from '@angular/material/card';
   ],
   exports: [
     CdkStepperModule,
+    FlexLayoutModule,
     FooterComponent,
     HeaderComponent,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

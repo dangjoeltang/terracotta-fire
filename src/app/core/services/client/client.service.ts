@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Client } from 'src/app/shared/models/client.model';
 
@@ -40,7 +40,6 @@ export class ClientService {
 
   createClient(clientData: Client) {
     clientData.createDate = new Date();
-    // clientData.clientId = clientData.clientId ? clientData.clientId : this.afs.createId();
     this.clientsCollection.add(clientData)
     .then(() => {
       console.log("Document successfully written!");
@@ -48,5 +47,11 @@ export class ClientService {
     .catch((error) => {
       console.error("Error writing document: ", error);
     });
+  }
+
+  findClientByAccountNumberOrEmail(querystring: string): Observable<Client[]> {
+    return this.afs.collection<Client>('clients', ref => 
+      ref.where('accountNumber', '==', querystring.toUpperCase())
+    ).valueChanges();
   }
 }
