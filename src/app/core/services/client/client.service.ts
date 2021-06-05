@@ -4,9 +4,11 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, forkJoin, from, Observable, of, throwError } from 'rxjs';
+import { catchError, concatMap, distinct, filter, map, mergeMap, pluck, take, tap } from 'rxjs/operators';
 import { Client } from 'src/app/shared/models/client.model';
+import { Contact } from 'src/app/shared/models/contact.model';
+import { ContactService } from '../contact/contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,7 @@ export class ClientService {
   public clientsList$ = this.clientsList.asObservable();
   public client$ = this.client.asObservable();
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private contactService: ContactService) { }
 
   getClients() {
     this.clientsCollection.valueChanges({ idField: 'clientId' }).pipe(take(1)).subscribe(
@@ -49,9 +51,45 @@ export class ClientService {
     });
   }
 
-  findClientByAccountNumberOrEmail(querystring: string): Observable<Client[]> {
+  findClientByAccountNumberOrEmail(querystring: string): Observable<Client> {
     return this.afs.collection<Client>('clients', ref => 
       ref.where('accountNumber', '==', querystring.toUpperCase())
-    ).valueChanges();
+    ).valueChanges().pipe(
+      map((clients: Client[]) => clients[0])
+    );
+  }
+
+  /**
+   * 
+   * @param email email address of a contact from a client
+   * @returns Observable of client that the contact's email is associated with
+   */
+  getClientOfContact(contact: Contact): Observable<Client> {
+    return this.afs.collection<Client>('clients', ref => 
+      ref.where('name', '==', contact.client))
+      .valueChanges()
+      .pipe(
+        map((clients: Client[]) => {
+          if (clients.length > 0) {
+            return clients[0]
+          } else {
+            throwError(new Error(`This contact does not currently belong a client`));
+          }
+        }),
+        catchError(err =>this.handleError(err))
+      )
+
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }

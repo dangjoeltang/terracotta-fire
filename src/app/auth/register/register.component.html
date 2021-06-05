@@ -17,7 +17,7 @@
     linear
     #stepper
   >
-    <mat-step [stepControl]="registerForm" editable="false">
+    <mat-step editable="false" completed="false">
       <form class="register-form" [formGroup]="registerForm">
         <ng-template matStepLabel>Lookup account</ng-template>
         <p>
@@ -87,16 +87,6 @@
 
       <div fxLayout="row">
         <span fxFlex="1 1 auto"></span>
-        <!-- <button
-          *ngIf="companyConfirmed"
-          mat-flat-button
-          matStepperNext
-          color="primary"
-          type="button"
-          [disabled]="!companyConfirmed"
-        >
-          Reset
-        </button> -->
         <button
           *ngIf="companyConfirmed"
           mat-flat-button
@@ -104,7 +94,7 @@
           color="primary"
           type="button"
           [disabled]="!companyConfirmed"
-          (click)="onSendVerificationEmail()"
+          (click)="onStepperNext(stepper)"
         >
           Send verification email
         </button>

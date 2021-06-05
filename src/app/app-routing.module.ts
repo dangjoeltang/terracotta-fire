@@ -8,22 +8,13 @@ const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: 'auth',
+    path: 'login',
     loadChildren: () => import ('./auth/auth.module').then(m => m.AuthModule)
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-  // },
-  // {
-  //   path: 'manage',
-  //   loadChildren: () => import('./navigation/navigation.module').then(m => m.Navi)
-  // },
   {
-    path: 'clients',
-    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+    path: 'manage',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-
 ];
 
 @NgModule({

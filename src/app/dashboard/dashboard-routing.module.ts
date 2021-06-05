@@ -5,8 +5,15 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  }
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'clients',
+        loadChildren: () => import('../client/client.module').then(m => m.ClientModule)
+      },
+    ]
+  },
+
 ];
 
 @NgModule({
