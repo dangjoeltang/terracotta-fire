@@ -6,13 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthComponent } from './auth.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AuthComponent
+    AuthComponent,
+    EmailVerificationComponent
   ],
   imports: [
     AuthRoutingModule,

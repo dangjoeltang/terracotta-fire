@@ -51,11 +51,11 @@
       </h4>
       <div
         class="company-name-confirmation"
-        *ngIf="clientLookupInfo"
+        *ngIf="client"
         fxLayout="column"
         fxLayoutAlign="center start"
       >
-        <h4 class="name-preview">{{ clientLookupInfo?.name }}</h4>
+        <h4 class="name-preview">{{ client?.name }}</h4>
         <div
           fxLayout="row"
           fxLayoutAlign="center center"
@@ -107,7 +107,10 @@
         associated with
       </p>
       <p style="font-style: oblique">
-        {{ clientLookupInfo?.name }}
+        {{ client?.name }}
+      </p>
+      <p style="font-style: oblique">
+        {{ contact?.email }}
       </p>
       <div fxLayout="row">
         <span fxFlex="1 1 auto"></span>
