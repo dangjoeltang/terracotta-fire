@@ -22,6 +22,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCheckboxModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -62,6 +64,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCheckboxModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

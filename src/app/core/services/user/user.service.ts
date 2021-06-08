@@ -22,17 +22,6 @@ export class UserService {
     })
   }
 
-  authenticate(email: string): void {
-    this.auth.signInWithEmailLink(email, window.location.href)
-    .then(
-      (result: firebase.auth.UserCredential) => {
-        if ( result.user && result.user.uid && result.user.email ) {
-          console.log(result);
-        }
-      }
-    )
-  }
-
   sendVerificationEmail(email: string) {
     const actionCodeSettings = {
       // URL you want to redirect back to. The domain (www.example.com) for this
@@ -97,10 +86,33 @@ export class UserService {
     }
   }
 
+  authenticate(email: string, password: string) {
+    this.auth.signInWithEmailAndPassword(email, password)
+    .then(
+      (result) => {
+        console.log(result);
+        this.user.next(result.user);
+        this.router.navigate(['/admin'])
+      }
+    )
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+  }
+
   signout(): void {
     this.auth.signOut().then(
       () => {
         console.log('Signed Out!')
+        this.router.navigate(['/welcome']);
       },
       ( error: any ) => {
 				console.warn( "Sign-out failure." );

@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onReturnHome() {
-
+    this.router.navigate(['/welcome']);
   }
 
   onStepperNext(stepper: MatVerticalStepper) {

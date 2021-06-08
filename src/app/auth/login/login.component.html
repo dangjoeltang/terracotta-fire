@@ -1,1 +1,121 @@
-<p>login works!</p>
+<div class="login-form-container">
+  <div class="header" fxLayout="row">
+    <h3 mat-dialog-title>Sign in to view your orders</h3>
+    <span fxFlex="1 1 auto"></span>
+    <button
+      class="dialog-close-button"
+      mat-icon-button
+      [routerLink]="['/welcome']"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="form-container">
+    <mat-vertical-stepper
+      class="register-form-stepper"
+      orientation="vertical"
+      linear
+      #stepper
+    >
+      <mat-step editable="false" completed="false">
+        <ng-template matStepLabel>Enter login info</ng-template>
+        <form
+          [formGroup]="noPasswordLoginForm"
+          (ngSubmit)="onSubmitPasswordless()"
+          *ngIf="loginMethod === 'otp'"
+        >
+          <p>
+            <mat-form-field>
+              <input
+                type="text"
+                matInput
+                placeholder="Email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </p>
+          <p
+            class="change-signin-method"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            (click)="changeSigninMethod()"
+          >
+            Sign in using email and password instead
+            <mat-icon>chevron_right</mat-icon>
+          </p>
+
+          <div class="button">
+            <button
+              type="submit"
+              color="primary"
+              mat-raised-button
+              (click)="onStepperNext(stepper)"
+            >
+              Send OTP
+            </button>
+          </div>
+        </form>
+
+        <form
+          [formGroup]="passwordLoginForm"
+          (ngSubmit)="onSubmitWithPassword()"
+          *ngIf="loginMethod === 'password'"
+        >
+          <p>
+            <mat-form-field>
+              <input
+                type="text"
+                matInput
+                placeholder="Email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </p>
+          <p
+            class="change-signin-method"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            (click)="changeSigninMethod()"
+          >
+            Sign in with a One-Time-Password
+            <mat-icon>chevron_right</mat-icon>
+          </p>
+
+          <div class="button">
+            <button
+              type="submit"
+              color="primary"
+              mat-raised-button
+              (click)="onStepperNext(stepper)"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <div *ngIf="loginMethod === 'password'">
+          <ng-template matStepLabel>Login</ng-template>
+          <p>Logging in...</p>
+        </div>
+        <div *ngIf="loginMethod === 'otp'">
+          <ng-template matStepLabel>Send OTP</ng-template>
+          <p>A link with the OTP has been sent to</p>
+          <p style="font-style: oblique">{{ email }}</p>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>

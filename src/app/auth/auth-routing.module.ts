@@ -8,20 +8,28 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   {
     path:'',
-    component: AuthComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
+    component: AuthComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/auth/login',
+        pathMatch: 'full' 
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      }      
+    ]
   },
   {
     path: 'verify-email',
     component: EmailVerificationComponent
   }
+
 ];
 
 @NgModule({

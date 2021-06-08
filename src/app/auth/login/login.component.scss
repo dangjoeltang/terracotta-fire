@@ -1,0 +1,47 @@
+@import '../../../variables.scss';
+
+// :host {
+//   display: flex;
+//   justify-content: center;
+//   margin: 100px 0px;
+// }
+
+.login-form-container {
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+
+  max-width: 580px;
+
+  .header {
+    display: flex;
+    align-items: baseline;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+
+  .form-container {
+    margin-top: 32px;
+
+    .change-signin-method {
+      cursor: pointer;
+      color: $primary;
+    }
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

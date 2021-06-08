@@ -37,6 +37,19 @@
             </span>
           </a>
         </div>
+        <div class="nav-item-container">
+          <a
+            mat-list-item
+            class="nav-items"
+            (click)="logoutClicked()"
+          >
+            <!-- <a mat-list-item class="nav-items" [routerLink]="['/logout']"> -->
+            <mat-icon color="primary" class="mat-icon-rtl-mirror"
+              >logout</mat-icon
+            >
+            <span class="nav-text"> Logout </span>
+          </a>
+        </div>
       </mat-nav-list>
     </mat-sidenav>
 
