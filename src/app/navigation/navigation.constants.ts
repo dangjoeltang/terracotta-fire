@@ -9,4 +9,9 @@ export const NavLinks = [
     routerLink: "clients",
     icon: "group"
   },
+  {
+    displayText: "Orders",
+    routerLink: "orders",
+    icon: "sell"
+  }
 ]
