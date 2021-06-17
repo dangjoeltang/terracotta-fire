@@ -1,43 +1,49 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { ClientService } from 'src/app/core/services/client/client.service';
 import { Client } from 'src/app/shared/models/client.model';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-client-table',
   templateUrl: './client-table.component.html',
   styleUrls: ['./client-table.component.scss']
 })
-export class ClientTableComponent implements OnInit, OnChanges, OnDestroy {
+export class ClientTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() clientList: Client[];
   @Output() clientSelected: EventEmitter<Client> = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  dataSource: MatTableDataSource<Client>
-  displayedColumns: string[] = ['name', 'email', 'state'];
-  displayedColumnsMobile: string[] = ['name', 'email', 'state'];
   
   private unsubscribe$: Subject<void>;
+  
+  clientDataSource: MatTableDataSource<Client>;
+  displayedColumns: string[] = ['name', 'email', 'state'];
+  
+  constructor(private clientService: ClientService) {
+    this.unsubscribe$ = new Subject<void>()
+  }
 
-  constructor(private clientService: ClientService) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.dataSource = new MatTableDataSource<Client>(this.clientList);
-    this.dataSource.paginator = this.paginator;
+  ngOnChanges() {
+    this.clientDataSource = new MatTableDataSource<Client>(this.clientList);
+    this.clientDataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
-    
+
+  }
+  
+  ngAfterViewInit(): void {
+    this.clientDataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.clientDataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.clientDataSource.paginator) {
+      this.clientDataSource.paginator.firstPage();
     }
   }
 

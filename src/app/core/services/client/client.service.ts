@@ -14,21 +14,27 @@ import { ContactService } from '../contact/contact.service';
   providedIn: 'root',
 })
 export class ClientService {
-  private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients');
+  private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients', ref => ref.limit(25));
   private clientsList = new BehaviorSubject(null);
   private client = new BehaviorSubject(null);
- 
+  
   public clientsList$ = this.clientsList.asObservable();
   public client$ = this.client.asObservable();
 
-  constructor(private afs: AngularFirestore, private contactService: ContactService) { }
+  constructor(private afs: AngularFirestore, private contactService: ContactService) {
+    this.fetchClients();
+  }
 
-  getClients() {
-    this.clientsCollection.valueChanges({ idField: 'clientId' }).pipe(take(1)).subscribe(
-      (clients: Client[]) => {
-        this.clientsList.next(clients);
-      }
-    )
+  // getClients() {
+  //   if (this.clientsList.getValue() === null) {
+  //     this.fetchClients();
+  //   }
+  // }
+
+  private fetchClients(): void{
+    this.clientsCollection.valueChanges({ idField: 'clientId' }).pipe(take(1)).subscribe((clients: Client[]) => {
+      this.clientsList.next(clients);
+    })
   }
 
   getClient(clientId: string) {

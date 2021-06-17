@@ -23,16 +23,7 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.clientService.clientsList$.pipe(takeUntil(this.unsubscribe$)).subscribe((clientList: Client[]) => {
       this.clients = clientList;
-    })
-    this.clientService.client$.pipe(takeUntil(this.unsubscribe$)).subscribe((client: Client) => {
-      this.client = client;
-    })
-    this.clientService.getClients();
-  }
-
-  refresh() { 
-    console.log(this.clients)
-    this.clientService.getClients();
+    });
   }
 
   clientSelected(client: Client) {
