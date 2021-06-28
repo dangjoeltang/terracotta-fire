@@ -1,0 +1,21 @@
+<mat-form-field *ngIf="filterable">
+  <input
+    matInput
+    (keyup)="applyFilter($event.target.value)"
+    placeholder="Filter"
+  />
+</mat-form-field>
+<table mat-table [dataSource]="data">
+  <ng-content></ng-content>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+</table>
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="loading"
+></mat-progress-bar>
+<mat-paginator
+  [pageSizeOptions]="pageSizeOptions"
+  *ngIf="pagination"
+></mat-paginator>

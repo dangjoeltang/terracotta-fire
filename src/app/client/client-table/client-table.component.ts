@@ -22,7 +22,7 @@ export class ClientTableComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'state'];
   
   constructor(private clientService: ClientService) {
-    this.unsubscribe$ = new Subject<void>()
+    this.unsubscribe$ = new Subject<void>();
   }
 
   ngOnChanges() {

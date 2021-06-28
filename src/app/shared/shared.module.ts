@@ -23,6 +23,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TableComponent } from './components/table/table.component';
+import { TableColumnComponent } from './components/table/table-column/table-column.component';
+import { StateNamePipe } from './pipes/state-name.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AddressFormComponent } from './components/address-form/address-form.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 
 
 @NgModule({
@@ -31,7 +39,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HeaderComponent,
     SideMenuComponent,
     MenuLinksComponent,
-    MenuDropdownComponent
+    MenuDropdownComponent,
+    StateNamePipe,
+    TableComponent,
+    TableColumnComponent,
+    AddressFormComponent,
+  ],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   imports: [
     CdkStepperModule,
@@ -40,13 +56,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
     MatStepperModule,
@@ -62,13 +81,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
     MatStepperModule,
@@ -77,7 +99,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MenuLinksComponent,
     ReactiveFormsModule,
     RouterModule,
-    SideMenuComponent
+    SideMenuComponent,
+    StateNamePipe,
+    TableComponent,
+    TableColumnComponent
   ]
 })
 export class SharedModule { }

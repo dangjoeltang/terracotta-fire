@@ -1,0 +1,306 @@
+<button
+  mat-button
+  color="primary"
+  aria-label="Example icon button with a home icon"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  [routerLink]="['/admin/orders']"
+>
+  <mat-icon>arrow_back</mat-icon> Back to orders
+</button>
+
+<div class="odp-container">
+  <button
+    mat-fab
+    color="primary"
+    aria-label="Edit"
+    (click)="toggleEdit(orderForm, true)"
+    *ngIf="!edittable"
+    class="fab-edit extended-fab-button"
+  >
+    <mat-icon>edit_note</mat-icon>
+    <span class="extended-fab-button__text">Edit</span>
+  </button>
+  <button
+    mat-fab
+    color="warn"
+    aria-label="Save"
+    (click)="toggleEdit(orderForm, false)"
+    *ngIf="edittable"
+    class="fab-edit extended-fab-button"
+  >
+    <mat-icon>done</mat-icon>
+    <span class="extended-fab-button__text">Save</span>
+  </button>
+
+  <form
+    *ngIf="order | async; let order"
+    [formGroup]="orderForm"
+    gdAreas.gt-md="details details shipping | details details billing"
+    gdAreas.lt-lg="details | shipping | billing"
+    gdGap="16px"
+  >
+    <div
+      gdArea="details"
+      class="odp-section details mat-elevation-z3"
+    >
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="odp-heading">
+          {{ order.poNumber }}
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <table
+          style="font-size: smaller; font-style: italic; opacity: 50%"
+        >
+          <tr>
+            <td>Modified:</td>
+            <td>
+              {{ order.modifyDate | date: 'medium' }}
+            </td>
+          </tr>
+          <tr>
+            <td>Created:</td>
+            <td>
+              {{ order.createDate | date: 'medium' }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <h4 class="subheader">Order Details</h4> -->
+
+      <div
+        gdAreas.gt-sm="client client po | rep amount status | payment-terms lsd none | notes notes notes"
+        gdAreas.lt-md="client po | amount status | rep rep | payment-terms lsd | notes notes"
+        gdGap="8px"
+        class="subcontainer order"
+      >
+        <mat-form-field appearance="fill" gdArea="client">
+          <mat-label>Client</mat-label>
+          <input matInput formControlName="client" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="po">
+          <mat-label>PO Number</mat-label>
+          <input matInput formControlName="poNumber" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="rep">
+          <mat-label>Sales Rep</mat-label>
+          <input matInput formControlName="salesRepName" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="amount">
+          <mat-label>Amount</mat-label>
+          <input
+            matInput
+            formControlName="amount"
+            [value]="orderForm.get('amount').value | currency"
+            required
+          />
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="status">
+          <mat-label>Status</mat-label>
+          <input matInput formControlName="status" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="lsd">
+          <mat-label>Last Shipment Date</mat-label>
+          <input matInput formControlName="lastShippingDate" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="payment-terms">
+          <mat-label>Payment Terms</mat-label>
+          <input matInput formControlName="paymentTerms" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" gdArea="notes">
+          <mat-label>Notes</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            cdkAutosizeMaxRows="25"
+            formControlName="shippingNotes"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div></div>
+    </div>
+
+    <div
+      gdArea="shipping"
+      class="odp-section shipping mat-elevation-z3"
+    >
+      <div class="subheader">Ship To:</div>
+      <div
+        class="address-container subcontainer"
+        gdAreas.gt-sm="name name name | address address address | city state zip | tel email email"
+        gdAreas.lt-md="name name | address address | city city | state zip | tel tel | email email"
+        gdGap="8px"
+      >
+        <mat-form-field
+          appearance="fill"
+          gdArea="name"
+          class="name-input"
+        >
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="shippingReceiver" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="address"
+          class="address-input"
+        >
+          <mat-label>Street Address</mat-label>
+          <input matInput formControlName="shippingAddress" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="city"
+          class="city-input"
+        >
+          <mat-label>City</mat-label>
+          <input matInput formControlName="shippingCity" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="state"
+          class="state-select"
+        >
+          <mat-label>State</mat-label>
+          <mat-select formControlName="shippingStateName">
+            <mat-option
+              *ngFor="let state of stateNames"
+              [value]="state"
+              >{{ state | stateName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="zip"
+          class="zip-input"
+        >
+          <mat-label>Zip Code</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="shippingPostCode"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="tel"
+          class="tel-input"
+        >
+          <mat-label>Phone</mat-label>
+          <input
+            matInput
+            type="phone"
+            formControlName="shippingPhone"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="email"
+          class="email-input"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="shippingEmail"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+      gdArea="billing"
+      class="odp-section billing mat-elevation-z3"
+    >
+      <div class="subheader">Bill To:</div>
+      <div
+        class="address-container subcontainer"
+        gdAreas.gt-sm="name name name | address address address | city state zip | tel email email"
+        gdAreas.lt-md="name name | address address | city city | state zip | tel tel | email email"
+        gdGap="8px"
+        gdRows="auto auto auto"
+      >
+        <mat-form-field
+          appearance="fill"
+          gdArea="name"
+          class="name-input"
+        >
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="billingReceiver" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="address"
+          class="address-input"
+        >
+          <mat-label>Street Address</mat-label>
+          <input matInput formControlName="billingAddress" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="city"
+          class="city-input"
+        >
+          <mat-label>City</mat-label>
+          <input matInput formControlName="billingCity" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="state"
+          class="state-select"
+        >
+          <mat-label>State</mat-label>
+          <mat-select formControlName="billingStateName">
+            <mat-option
+              *ngFor="let state of stateNames"
+              [value]="state"
+              >{{ state | stateName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="zip"
+          class="zip-input"
+        >
+          <mat-label>Zip Code</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="billingPostcode"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="tel"
+          class="tel-input"
+        >
+          <mat-label>Phone</mat-label>
+          <input
+            matInput
+            type="phone"
+            formControlName="billingPhone"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          gdArea="email"
+          class="email-input"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="billingEmail"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <!-- <div class="odp-items-container mat-elevation-z3"></div> -->
+</div>

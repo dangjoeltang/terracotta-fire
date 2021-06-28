@@ -14,7 +14,7 @@ import { ContactService } from '../contact/contact.service';
   providedIn: 'root',
 })
 export class ClientService {
-  private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients', ref => ref.limit(25));
+  private clientsCollection: AngularFirestoreCollection = this.afs.collection<Client[]>('clients', ref => ref.limit(5));
   private clientsList = new BehaviorSubject(null);
   private client = new BehaviorSubject(null);
   
@@ -32,7 +32,7 @@ export class ClientService {
   // }
 
   private fetchClients(): void{
-    this.clientsCollection.valueChanges({ idField: 'clientId' }).pipe(take(1)).subscribe((clients: Client[]) => {
+    this.clientsCollection.valueChanges({ idField: 'clientId' }).subscribe((clients: Client[]) => {
       this.clientsList.next(clients);
     })
   }

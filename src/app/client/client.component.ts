@@ -27,7 +27,7 @@ export class ClientComponent implements OnInit {
   }
 
   clientSelected(client: Client) {
-    this.clientService.getClient(client.clientId);
+    // this.clientService.getClient(client.clientId);
     // this.openClientQuickViewDialog();
   }
 
